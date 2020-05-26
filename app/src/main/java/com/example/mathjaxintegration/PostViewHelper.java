@@ -43,21 +43,27 @@ public class PostViewHelper implements View.OnClickListener {
 //        w.getSettings().setUseWideViewPort(true);
 //        w.getSettings().setBuiltInZoomControls(true);
 //        w.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        w.loadDataWithBaseURL("http://localhost", "<script type='text/x-mathjax-config'>"
-                +"MathJax.Hub.Config({ "
-                +"showMathMenu: false, "
-                +"jax: ['input/TeX','output/HTML-CSS'], "
-                +"extensions: ['tex2jax.js'], "
-                +"TeX: { extensions: ['AMSmath.js','AMSsymbols.js',"
-                +"'noErrors.js','noUndefined.js'] } "
-                +"});</script>"
-                +"<script type='text/javascript' "
-                +"src='file:///android_asset/MathJax/MathJax.js'"
-                +"></script><span id='math'>THis is inner html When $a \\ne 0$, there are two solutions to \\(ax^2 + bx + c = 0\\) and they are\\n\" +\n" +
-                "                \"    \\(x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.\\)</span>","text/html","utf-8","");
+        String data = "<script type='text/x-mathjax-config'>"
+                + "MathJax.Hub.Config({ "
+                + "showMathMenu: false, "
+                + "jax: ['input/TeX','output/HTML-CSS'], "
+                + "extensions: ['tex2jax.js'], "
+                + "TeX: { extensions: ['AMSmath.js','AMSsymbols.js',"
+                + "'noErrors.js','noUndefined.js'] } "
+                + "});</script>"
+                + "<script type='text/javascript' "
+                + "src='file:///android_asset/MathJax/MathJax.js'"
+                + "></script><span id='math'>dynamic_content</span>";
+        /*
+        This is inner html When $a \\ne 0$, there are two solutions to \\(ax^2 + bx + c = 0\\) and they are\\n\" +\n" +
+                "                \"    \\(x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.\\)
+         */
+        data = data.replace("dynamic_content", text);
+
+        w.loadDataWithBaseURL("http://localhost", data,"text/html","utf-8","");
 //        w.loadUrl("http://www.google.com");
-        w.loadUrl("javascript:document.getElementById('math').innerHTML='\\\\["
-                +doubleEscapeTeX(text)+"\\\\]';");
+//        w.loadUrl("javascript:document.getElementById('math').innerHTML='\\\\["
+//                +doubleEscapeTeX(text)+"\\\\]';");
         w.loadUrl("javascript:MathJax.Hub.Queue(['Typeset',MathJax.Hub]);");
 //        String unencodedHtml =
 //                "&lt;html&gt;&lt;body&gt;'%23' is the percent code for ‘#‘ &lt;/body&gt;&lt;/html&gt;";

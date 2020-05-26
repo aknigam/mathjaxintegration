@@ -1,0 +1,2 @@
+rootProject.name='MathjaxIntegration'
+include ':app'
